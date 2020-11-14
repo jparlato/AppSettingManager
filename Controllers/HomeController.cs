@@ -6,20 +6,28 @@ using System.Threading.Tasks;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Logging;
 using AppSettingsManager.Models;
+using Microsoft.Extensions.Configuration;
 
 namespace AppSettingsManager.Controllers
 {
 	public class HomeController : Controller
 	{
 		private readonly ILogger<HomeController> _logger;
+		private readonly IConfiguration _config;
 
-		public HomeController(ILogger<HomeController> logger)
+		public HomeController(ILogger<HomeController> logger, IConfiguration config)
 		{
 			_logger = logger;
+			_config = config;
+
 		}
 
 		public IActionResult Index()
 		{
+			ViewBag.SendGridKey = _config.GetValue<string>("SendGridKey");
+			ViewBag.TwilioAuthToken = _config.GetValue<string>("Twilio:Authtoken");
+			ViewBag.TwilioAccountSid = _config.GetValue<string>("Twilio:AccountSid");
+
 			return View();
 		}
 

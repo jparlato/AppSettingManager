@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using AppSettingsManager.Extensions;
 using AppSettingsManager.Models;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
@@ -25,9 +26,8 @@ namespace AppSettingsManager
 		// This method gets called by the runtime. Use this method to add services to the container.
 		public void ConfigureServices(IServiceCollection services)
 		{
-			var twilioSettings = new TwilioSettings();
-			new ConfigureFromConfigurationOptions<TwilioSettings>(Configuration.GetSection("Twilio")).Configure(twilioSettings);
-			services.AddSingleton(twilioSettings);
+
+			services.AddConfiguration<TwilioSettings>(Configuration, "Twilio");
 
 
 			services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));

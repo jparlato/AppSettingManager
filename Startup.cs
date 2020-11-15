@@ -28,6 +28,8 @@ namespace AppSettingsManager
 		{
 
 			services.AddConfiguration<TwilioSettings>(Configuration, "Twilio");
+			//services.AddConfiguration<SocialLoginSettings>(Configuration, "SocialLoginSettings");
+			services.Configure<SocialLoginSettings>(Configuration.GetSection("SocialLoginSettings"));
 
 
 			services.Configure<TwilioSettings>(Configuration.GetSection("Twilio"));

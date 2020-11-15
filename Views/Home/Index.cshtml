@@ -1,4 +1,6 @@
 ﻿@inject Microsoft.Extensions.Configuration.IConfiguration _config;
+@inject Microsoft.Extensions.Options.IOptions<SocialLoginSettings> socialLoginSettings;
+
 
 @{
 	ViewData["Title"] = "Home Page";
@@ -38,6 +40,14 @@
 			<strong class="d-inline-block mb-2 text-primary">Twilio Injected</strong>
 			<div class="mb-1 text-muted">@_config.GetSection("Twilio:AuthToken").Value</div>
 			<div class="mb-1 text-muted">@_config.GetSection("Twilio:AccountSid").Value</div>
+		</div>
+
+	</div>
+	<div class="col-md-6">
+		<div class="card d-flex flex-column align-items-start">
+			<strong class="d-inline-block mb-2 text-primary">Social Login</strong>
+			<div class="mb-1 text-muted">@ViewBag.FacebookKey</div>
+			<div class="mb-1 text-muted">@socialLoginSettings.Value.GoogleSettings.Key</div>
 		</div>
 
 	</div>

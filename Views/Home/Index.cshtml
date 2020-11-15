@@ -1,4 +1,6 @@
-﻿@{
+﻿@inject Microsoft.Extensions.Configuration.IConfiguration _config;
+
+@{
 	ViewData["Title"] = "Home Page";
 }
 
@@ -8,11 +10,34 @@
 </div>
 <div class="row mb-2">
 	<div class="col-md-6">
-		<div class="card-body d-flex flex-column align-items-start">
-			<strong class="d-inline-block mb-2 text-primary"></strong>
+		<div class="card  d-flex flex-column align-items-start">
+			<strong class="d-inline-block mb-2 text-primary">Send Grid</strong>
 			<div class="mb-1 text-muted">@ViewBag.SendGridKey</div>
+		</div>
+
+	</div>
+	<div class="col-md-6">
+		<div class="card d-flex flex-column align-items-start">
+			<strong class="d-inline-block mb-2 text-primary">Twilio From Controller</strong>
 			<div class="mb-1 text-muted">@ViewBag.TwilioAuthToken</div>
 			<div class="mb-1 text-muted">@ViewBag.TwilioAccountSid</div>
+			<div class="mb-1 text-muted">@ViewBag.TwilioPhoneNumber</div>
+		</div>
+
+	</div>
+	<div class="col-md-6">
+		<div class="card d-flex flex-column align-items-start">
+			<strong class="d-inline-block mb-2 text-primary">BottomLevel</strong>
+			<div class="mb-1 text-muted">@ViewBag.BottomLevelSetting</div>
+		</div>
+
+	</div>
+
+	<div class="col-md-6">
+		<div class="card d-flex flex-column align-items-start">
+			<strong class="d-inline-block mb-2 text-primary">Twilio Injected</strong>
+			<div class="mb-1 text-muted">@_config.GetSection("Twilio:AuthToken").Value</div>
+			<div class="mb-1 text-muted">@_config.GetSection("Twilio:AccountSid").Value</div>
 		</div>
 
 	</div>
